@@ -1,0 +1,8 @@
+Inserir a descrição de modificações a serem realizadas no sistema.
+
+Código duplicado {
+    Situação:
+        Os componentes ClassificationDatabase e SegmentationDatabase usam o mesmo trecho de código para buscar as imagens do banco de dados fictício.
+    Proposta de solução:
+        Criar um componente dedicado para conter a logica de renderizar as imagens buscadas no banco de dados fictício e adicionar seu seletor nas páginas ClassificationDatabase e SegmentationDatabase.
+}

@@ -1,0 +1,248 @@
+<div class="container">
+    <div class="row">
+
+      <div class="formatacao-conteudo-pagina formatacao-pagina-pagina_de_testes">
+        <div class="col-md-12">
+            <h1>Curso de Angular 8</h1>
+            <hr>
+        </div>
+
+        <div class="col-md-12">
+          <h3>Data Biding(Class to Template)</h3>
+          <p>
+            Define um metodo na classe que é chamado mediante uma acao realizada no template (click do botão abaixo)
+          </p>
+          <button (click)="onClick($event)" > Disparar evento por clic</button>
+          <p> {{acaoDoClick}} </p>
+          <hr>
+        </div>
+
+        <div class="col-md-12">
+          <h3>Data Binding (Template to Class)</h3>
+          <p>
+            Cria um input  no tempate para receber um dado e enviar para a classe e dar um console.log().
+          </p>
+          <input #entrada type="text">
+          <button (click)="logMessage(entrada.value)">Log</button>
+          <hr>
+        </div>
+
+        <div class="col-md-12">
+          <h3>Two Way Binding(Template to Class, Class to tempalte)</h3>
+          <p>
+            Cria uma relacao de duas vias entre propriedades de atributos do template e variaveis da classe. Permite atualizar o valor de uma propriedade e renderiza-la no template com valor atualizado em tempo real. para isso usa-se a diretiva ngModel
+          </p>
+          
+          Forneça um valor para o two way biding: <input [(ngModel)]="variavelName" type="text"> <br>
+          Dado informado na input: {{variavelName}}
+          <hr>
+        </div>
+        <div class="col-md-12">
+          <h3>Diretivas estruturais - ngIf</h3>
+          <p>
+            ngIf, ngFor e ngSwitch
+          </p>
+          <p *ngIf="true">*ngIf="true" exibe</p>
+          <p *ngIf="false">*ngIf="false não exibe"</p>
+          <p *ngIf="exibirMensagem">Exibindo mensagem [ A ] baseado no valor da variavel isTrue no componente</p>
+
+          <p *ngIf="!exibirMensagem">Exibindo mensagem [ B ] baseado no valor da variavel isTrue no componente</p>
+
+          <p>Abaixo, tem-se o uUso da diretiva ngIf na sintaxe if condicao then caso_1 else caso_2</p>
+          <div *ngIf="exibirMensagem then if_bloco else else_bloco">
+
+          </div>
+          <ng-template #if_bloco>
+            <!-- renderizado baseado a avaliacao do *ngIf -->
+            <h2>Exibe Cabeçalho 1</h2>
+          </ng-template>
+          
+          <ng-template #else_bloco>
+            <!-- renderizado baseado a avaliacao do *ngIf -->
+            <h2> Exibe Cabeçalho 2</h2>
+          </ng-template>
+          <hr>
+
+          <h3>Diretivas estruturais - ngSwitch</h3>
+          <div [ngSwitch]="variavelCor">
+            <div *ngSwitchCase="'red'"> Cor verlelha </div>
+            <div *ngSwitchCase="'blue'"> Cor azul </div>
+            <div *ngSwitchCase="'black'"> Cor preto </div>
+            <div *ngSwitchCase="'green'"> Cor verde </div>
+            <div *ngSwitchDefault> Escolha uma cor na variavel variavel "Cor" da classe </div>
+          </div>
+          <hr>
+
+          <h3>Diretivas estruturais - ngFor</h3>
+          <h5>Items da lista</h5>
+          <div *ngFor="let item of listOfItens; index as i">
+            <p> {{i}} - {{item}} </p>
+          </div>
+          <hr>
+
+          <h3>Aula 15 - Component interaction</h3>
+          <img class="img-responsive" src="./assets/img/pagina_de_testes/component_interaction.png" alt="">
+          <p>
+            O AppComponent é chamado de componente Pai, o TestComponent é chamado de componente filho. Cada componente pode enviar dados um para o outro usando decorators @Input e @Output. O decorator @Input é usado para aceitar dados vindos de outro componente. O @Output decorator é usado para enviar eventos para outros componentes.
+          </p>
+
+          <p>
+            Vi os exemplos da aula 15, mas não quis implementar. A ideia é mandar dados de um componente.ts para outro componente.ts usando o seletor como intermediador. Essa estrategia nao me parece melhor que criar uma classe de serviço para fazer isso. Não sei ainda em que caso essa estratégia se aplica.
+          </p>
+          <hr>
+
+          <h3>Aula 16 - Pipes</h3>
+          <p>
+            Pipes permitem transformar dados antes de exibi-los na view. A sintaxe é aplicada no template e é a seguinte: Propriedade | funcao.
+          </p>
+
+          <h5>Strings e objetos</h5>
+          <p>
+            Original: {{variavelParaPipe}} <br>
+            Substring: {{variavelParaPipe | slice:0:16}} <br>
+            Lowercase: {{variavelParaPipe | lowercase}} <br>
+            Uppercase: {{variavelParaPipe | uppercase}} <br>
+            TitleCase: {{variavelParaPipe | titlecase}} <br>
+            Aniversário sem tratar: {{birthday}} <br>
+            Aniversário tratado: {{birthday | date}} <br>
+            Aniversário tratado: {{birthday | date:'short'}} <br>
+            Aniversário tratado: {{birthday | date:'shortDate'}} <br>
+            Aniversário tratado: {{birthday | date:'dd/MM/yyyy'}}<br>
+            Aniversário tratado: {{birthday | date:'shortTime'}} <br>            
+            Pessoa Json tratado: {{pessoaJson | json}} <br>
+            Pessoa Json sem tratar: {{pessoaJson}} <br>
+          </p>
+
+          <h5>Numeros</h5>
+
+          <p>
+            <!-- à esquerda da barra vertical do pipe 'number': o número que será exibido
+                 à direita da barra, o tipo de formatacao do numero 1.2-3 indica q antes da casa decimal (.) deve haver 1 digito e depois da casa decimal (.) dve haver no mínimo 2 digitos decimais e (-) no maximo 3 numeros decimais. ARENÇÃO ÀS ASPAS SIMPLES!!!.
+            --->
+            A = {{5.678 | number:'1.2-3'}} <br>
+            B = {{5.678 | number:'5.4-5'}} <br>
+            C = {{5.678 | number:'1.0-1'}} <br>
+            <!-- Outros exemplos -->
+            D = {{0.20 | percent}} <br>
+            E = {{0.50 | currency: 'GBP'}} <br>
+            F = {{0.50 | currency: 'GBP': 'code'}} <br>
+            G = {{0.50 | currency: 'BRL': true}} <br>
+          </p>
+          
+          <hr>
+
+          <h3>Aula 17 - Serviços</h3>
+          <p>
+            Antes de falar sobre serviços, eis um exemplo de como renderizar uma lista:
+          </p>
+
+          <ul *ngFor="let pessoa of listaDePessoasComoVariavel">
+            <li> {{pessoa.nome}} tem {{pessoa.idade}} anos </li>
+          </ul>
+
+          <p>
+              Um serviço é baseado nos princípios: <br>
+              Don't Repeat Youtself - DRY que tem como premissa evitar repetição de código ctrl + c e ctrl + v <br>
+              Single Responsability Principle: Uma classe de componente tem apenas UMA única responsabilidade. Gerar uma solução e essa solução é um serviço \o/. <br>
+              Uma classe, como serviço, possui os sseguintes propósitos: <br>
+              * Compartilhar dados <br>
+              * Implementar a lógica da aplicacao <br>
+              * Realizar interações externas à aplicação (como consultar uma base de dados) <br>
+              A convenção de nomes em Angular diz qu eo nome de um arquivo de serviço deve ter o seguinte formato: <br>
+              nome_da_classe<strong>.service.ts</strong> <br>
+            </p>
+
+            <h3>Aula 18 - Injeção de dependências</h3>
+            <p>
+              Um serviço é utilizado através do padrão Injeção de Dependências. O exemplo abaixo mostra que a classe Car possui duas dependências: <br>
+              1 - Uma instância de Engine() <br>
+              2 - Uma instancia de Tires() <br>
+              O construtor da classe Car instancia as duas dependências dentro de si. Mas se alguma propriedade da Engine() mudar, pode-se ter um problema na classe Car e a instanciação pode ficar inválida, pois a classe Car nao sabe reconhecer mudanças em suas dependências de forma automática e corrigí-las.
+            </p>
+
+            <img src="./assets/img/pagina_de_testes/injecao_dependencia_errado.png" class=img-responsive alt="Injecao de dependencias">
+
+            <p>
+              Injeção de dependência é um padrão de projetos em que uma classe recebe suas dependências de uma fonte externa em vez do programador ter resolvê-la. <br>
+              A imagem abaixo compara duas situações, em que a imagem da <strong>direita</strong> representa a forma correta de se realizar a injeção de dependências. Não se instancia as dependências dentro da classe Car, mas sim, recebe-se duas instâncias via construtor (a correçaõ da dependência fica externa à classe Car). Dessa forma, a classe ar consegue obter um objeto da forma que ele deve ser, e se este mudar, a classe Car terá a versão correta do objeto.
+            </p>
+
+            <img src="./assets/img/pagina_de_testes/injecao_dependencia_certo.png" class=img-responsive alt="Injecao de dependencias">
+            <h5>Exemplo de uso correto da injeção de dependências</h5>
+            <img src="./assets/img/pagina_de_testes/exemplo_injecao_dependencia_correto.png" alt="">
+
+            <p>
+              Esta é a abordagem correta para realizar a injeção de dependência, mas à medida que a classe Car fosse ganhando mais cmponentes (Suspension(), Paint(), etc) ficaria mais complexo resolver a injeçaõ de dependência desta forma. O Angular pode resolver essa situação reunindo todas as dependências em um local (ou detectando todas as dependências de uma classe e aplicando-as sem que o desenvolvedor tenha q se preocupar) e injetando-as conforme necessário como serviços.
+            </p>
+            <img src="./assets/img/pagina_de_testes/injetor_dependencia_angular.png" alt="">
+
+            <h3>Aula 19 - Usando um serviço</h3>
+            <p>
+              Deve-se seguir os seguintes passos para usar a injeção de dependências como um framework: <br>
+              1 -  Definir uma classe de serviços para que ela realize o serviço desejado <br>
+              2 - Registrar o serviço por meio de um injetor <br>
+              3 - Declarar as dependências na classe que as possui. <br>
+
+              A imagem abaixo retrara uma classe EmpList que precisa do serviço de EmpDetail e usa o serviço EmployeService para injetar a dependênia na classe EmpList
+            </p>
+
+            <img src="./assets/img/pagina_de_testes/exemplo_employe.png" alt="">
+
+            A imagem abaixo exibe um exemplo de como realizar o segundo passo, que consistem em registrar o serviço. O local escolhido foi o módulo geral da aplicação, o "AppModule". O Angular possui uma hierarquia, tal que qualquer serviço registrado estará disponível apenas para o módulo em que se registrou o servio e seus módulos filhos. Ao registrar no AppModule, toda a aplicação terá acesso ao serviço, já q ele é o módulo mais alto na aplicação. Este exemplo está presente neste projeto.
+
+            <img src="./assets/img/pagina_de_testes/hierarquia_angular.png" alt="" class="img-responsive">
+
+            <img src="./assets/img/pagina_de_testes/exemplo_registro_servico.png" alt="" class="img-responsive">
+            
+            
+            Este componente, chamado PaginaDeTesteComponent terá o serviço de listarPessoas(), logo deve injetar a dependência no construtor da classe PaginaDeTesteComponent
+            
+            <img src="./assets/img/pagina_de_testes/exemplo_injecao_dependencia_resolvida.png" alt="" class="img-responsive">
+
+            <p>
+              Abaixo, tem-se o uso do serciço que foi aderido à PaginaDeTesteComponent:
+            </p>
+
+            <ul *ngFor="let uma_pessoa of listaDePessoasHardCode">
+              <li>
+                Nome: {{uma_pessoa.nome}}, idade {{uma_pessoa.idade}}
+              </li>
+            </ul>
+
+            <h3>Aula 20 - HTTP e Observables</h3>
+            <p>
+              A imagem abaixo ilustra como a interação do frontend e o backend funciona. Essa comunicação é realizada via  requisições Http. Esse mecanismo funciona em dois passos, no primeiro passo, uma requisição http é enviada à fonte de dados, no segundo passo uma resposta é fornecida da fonte de dados (banco de dados, API, web service...) para o solicitante. <br>
+
+              Aqueles que realizam as requisições http à procura de dados são chamados de Subscribers. Os Observables são , nada mais, que as respostas das requisições (dados retornados). A requisiçaõ é realizada via classe de serviço e a resposta é fornecida a esse serviço. Componentes que queiram fazer uso desta resposta devem importar este serviço.
+            </p>
+            <img src="./assets/img/pagina_de_testes/mecanismo_http.png" alt="" class="img-responsive">
+            
+            <p>
+              Os passos abaixo descrevem como o processo completo de requisiçaõ funciona: <br>
+              1 - Realiza-se uma requisiçaõ via HTTP; <br>
+              2 - Recebe-se um Observable omo resposta e o armazena em um vetor na classe de serviço; <br>
+              3 - Um componente solicita o serviço que contem os dados (Subscribe to the service); <br>
+              4 - Armazena-se o array de dados fornecido pelo serviço em uam variável local; <br>
+              5 -  Envia o array para o templete e o consome. <br>
+            </p>
+
+            <p>
+              Para se trabalhar com Observables, é necessário usar a biblioteca externa ao framework: RxJS. Veja os exemplos neste projeto. Atente-se para o arquivo pessoas.json, localizado em assets/database_fake.
+            </p>
+
+            <p>
+              Exemplo do resultado de uma requisição HTTP: <br>              
+            </p>
+
+            <ul *ngFor="let pessoa of listaDePessoasHttpRequest">
+              <li>
+                Pessoa de id {{pessoa.id}}, chamada {{pessoa.nome}} tem {{pessoa.idade}} anos
+              </li>
+            </ul>
+            
+        </div>
+      </div>
+    </div>
+    <hr>
+</div>
+

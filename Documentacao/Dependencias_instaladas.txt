@@ -1,0 +1,4 @@
+Instalar na ordem que aparece
+
+<npm install bootstrap>: Instala o bootstrap 4
+<npm install normalize.css>: Reseta as configurações de estilo do navegador.
